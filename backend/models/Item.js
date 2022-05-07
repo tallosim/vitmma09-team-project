@@ -1,7 +1,7 @@
-var Schema = require('mongoose').Schema
-var db = require('../config/db')
+const Schema = require('mongoose').Schema
+const db = require('../config/db')
 
-var Item = db.model('items', {
+const Item = db.model('items', {
     lastRead: {
         time: Schema.Types.Date,
         reader: {
@@ -13,7 +13,8 @@ var Item = db.model('items', {
         type: Schema.Types.ObjectId,
         ref: 'products'
     },
-    tagID: Schema.Types.String
+    tagID: Schema.Types.String,
+    status: Schema.Types.String
 })
 
 module.exports = Item

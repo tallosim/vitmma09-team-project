@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Item = require('../models/Item')
 const Reader = require('../models/Reader')
 const Product = require('../models/Product')
-
+const ItemStatus = require('../models/ItemStatus')
 
 const makeEntity = (Model, props) => {
     let entity = Model()
@@ -37,7 +37,12 @@ reader.save((err, readerResult) => {
             return console.log(err)
 
         let items = tags
-            .map(tag => ({ lastRead: {}, product: productResult._id, tagID: tag }))
+            .map(tag => ({ 
+                lastRead: {}, 
+                product: productResult._id, 
+                tagID: tag, 
+                status:  ItemStatus.InStock
+            }))
             .map(item => makeEntity(Item, item))
 
         Item.collection.insertMany(items)

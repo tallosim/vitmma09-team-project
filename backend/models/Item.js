@@ -4,9 +4,9 @@ const db = require('../config/db')
 const Item = db.model('items', {
     lastRead: {
         time: Schema.Types.Date,
-        reader: {
+        basket: {
             type: Schema.Types.ObjectId,
-            ref: 'readers'
+            ref: 'baskets'
         }
     },
     product: {

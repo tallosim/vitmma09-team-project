@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const Item = require('../models/Item')
-const Reader = require('../models/Reader')
+const Basket = require('../models/Basket')
 const Product = require('../models/Product')
 const ItemStatus = require('../models/ItemStatus')
 
@@ -20,10 +20,10 @@ const tags = [
     '06E1A960'
 ]
 
-let reader = Reader()
-reader.uuid = 'ff23cb4d-57c9-4099-8cbf-30dd10d7cc4a'
+let basket = Basket()
+basket.uuid = 'ff23cb4d-57c9-4099-8cbf-30dd10d7cc4a'
 
-reader.save((err, readerResult) => {
+basket.save((err, basketResult) => {
     if (err)
         return console.log(err)
 

@@ -1,23 +1,23 @@
 const sendTagIDMW = require('../middlewares/sendTagIDMW')
 const getItemMW = require('../middlewares/getItemMW')
-const getReaderMW = require('../middlewares/getReaderMW')
+const getBasketMW = require('../middlewares/getBasketMW')
 const saveReadingsMW = require('../middlewares/saveReadingsMW')
 
 const Item = require('../models/Item')
-const Reader = require('../models/Reader')
+const Basket = require('../models/Basket')
 const Product = require('../models/Product')
 
 module.exports = (app) => {
     const objectRepository = {
         itemModel: Item,
-        rederModel: Reader,
+        rederModel: Basket,
         productModel: Product
     }
 
     app.route('/api/sendTagID').post(
         sendTagIDMW(objectRepository),
         getItemMW(objectRepository),
-        getReaderMW(objectRepository),
+        getBasketMW(objectRepository),
         saveReadingsMW(objectRepository)
     )
 }

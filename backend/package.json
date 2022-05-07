@@ -19,6 +19,9 @@
   "homepage": "https://github.com/tallosim/vitmma09-team-project#readme",
   "dependencies": {
     "body-parser": "^1.19.2",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mongo-sanitize": "^1.1.0",
+    "mongoose": "^6.3.2",
+    "sanitize": "^2.1.0"
   }
 }

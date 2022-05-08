@@ -4,12 +4,13 @@ const mongoose = require('mongoose')
 
 module.exports = function (objectrepository) {
     const ItemModel = requireOption(objectrepository, 'itemModel')
+    const ItemStatusModel = requireOption(objectrepository, 'itemStatusModel')
 
     return function (req, res, next) {
         if (!res.tpl || !res.tpl.basket)
             return next({ code: 500 })
 
-        ItemModel.find({ 'lastRead.basket': res.tpl.basket }, (err, result) => {
+        ItemModel.find({ 'lastRead.basket': res.tpl.basket, status: ItemStatusModel.InStock }, (err, result) => {
             if (err)
                 return next({ code: 500, msg: 'DB error!' })
 

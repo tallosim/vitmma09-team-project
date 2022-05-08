@@ -5,9 +5,29 @@ module.exports = function (objectrepository) {
     const ItemModel = requireOption(objectrepository, 'itemModel')
 
     return function (req, res, next) {
-        ItemModel.findOne({ tagID: sanitize(req.body.tagID) }, (err, result) => {
-            if (err || !result)
-                return next({ code: 404, msg: 'Item not found with this tagID.' })
+        var tagID = null
+        
+        if (req.method === 'GET') {
+            if (!req.params || !req.params.tagID)
+                return next({code: 400, msg: 'Bad request params!'})
+            
+                tagID = req.params.tagID
+        }
+
+        if (req.method === 'POST') {
+            if (!req.body || !req.body.tagID)
+                return next({code: 400, msg: 'Bad request body!'})
+            
+                tagID = req.body.tagID
+        }
+
+        ItemModel.findOne({ tagID: sanitize(tagID) }, (err, result) => {
+            if (err)
+                return next({ code: 500, msg: 'DB error!' })
+
+            if (!result)
+                return next({ code: 404, msg: 'Basket not found with the given tagID.' })
+
 
             res.tpl.item = result
             return next()

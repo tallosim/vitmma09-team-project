@@ -10,7 +10,7 @@ module.exports = function (objectrepository) {
         if (!res.tpl || !res.tpl.basket)
             return next({ code: 500 })
 
-        ItemModel.find({ 'lastRead.basket': res.tpl.basket, status: ItemStatusModel.InStock }, (err, result) => {
+        ItemModel.find({ 'lastRead.basket': res.tpl.basket, status: ItemStatusModel.InBasket }, (err, result) => {
             if (err)
                 return next({ code: 500, msg: 'DB error!' })
 

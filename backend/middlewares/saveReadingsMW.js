@@ -1,11 +1,14 @@
 const requireOption = require('./common').requireOption
 
 module.exports = function (objectrepository) {
+    const ItemStatusModel = requireOption(objectrepository, 'itemStatusModel')
+
     return function (req, res, next) {
         res.tpl.item.lastRead = {
             time: req.body.time,
             basket: res.tpl.basket._id
         }
+        res.tpl.item.status = ItemStatusModel.InBasket
 
         res.tpl.item.save((err, result) => {
             if (err)

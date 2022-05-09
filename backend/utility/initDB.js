@@ -15,10 +15,7 @@ const makeEntity = (Model, props) => {
     return entity
 }
 
-const tags = [
-    '06E1A959',
-    '06E1A960'
-]
+const tags = process.env.TAGS.split(' ')
 
 let basket = Basket()
 basket.uuid = 'ff23cb4d-57c9-4099-8cbf-30dd10d7cc4a'

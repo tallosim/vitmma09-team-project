@@ -21,7 +21,7 @@ module.exports = function (objectrepository) {
                 tagID = req.body.tagID
         }
 
-        tagID = tagID.uppercase()
+        tagID = tagID.toUpperCase()
 
         ItemModel.findOne({ tagID: sanitize(tagID) }, (err, result) => {
             if (err)

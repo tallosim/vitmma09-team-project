@@ -14,7 +14,7 @@ module.exports = function (objectrepository) {
             if (err)
                 return next({ code: 500, msg: 'Database error during saving.' })
             
-            console.log(`RFID data recived from "${req.body.basketID}" basket.`)
+            console.log(`RFID tag readed "${res.tpl.item.tagID}" from "${req.body.basketID}" basket.`)
             return res.json('Ok')  
         })
     }

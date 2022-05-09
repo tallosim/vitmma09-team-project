@@ -21,6 +21,8 @@ module.exports = function (objectrepository) {
                 tagID = req.body.tagID
         }
 
+        tagID = tagID.uppercase()
+
         ItemModel.findOne({ tagID: sanitize(tagID) }, (err, result) => {
             if (err)
                 return next({ code: 500, msg: 'DB error!' })

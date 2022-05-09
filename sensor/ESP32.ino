@@ -1,11 +1,13 @@
+
 #include <ArduinoHttpClient.h>
 #include <SPI.h>
 #include <MFRC522.h>
 #include <WiFi.h>
 
 //WiFire csatlakozáshoz
-const char* ssid = "<WIFI_NAME>";
-const char* password =  "<WIFI_PASSWORD>";
+const char* ssid = "<WIFI_SSID>";
+const char* password =  "<PASSWORD_SSID>";
+
 
 // RFID
 #define SS_PIN 21
@@ -14,8 +16,12 @@ const char* password =  "<WIFI_PASSWORD>";
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
 
 //API
-char serverAddress[] = "<API_SERVER_ADDRESS>";
+char serverAddress[] = "<SERVER_ADDRESS>";
 int port = 8000;
+
+WiFiClient wifi;
+HttpClient apiClient = HttpClient(wifi, serverAddress, port);
+int status = WL_IDLE_STATUS;
 
 void setup() {
   // put your setup code here, to run once:
@@ -67,15 +73,15 @@ void loop() {
 
   Serial.println("making POST request");
   String contentType = "application/json";
-  String s1 = "{\"sensorID\": \"";
-  String s2 = ",\"card_id\": \"";
+  String s1 = "{\"basketID\": \"";
+  String s2 = "\",\"tagID\": \"";
   String s3 = "\"}";
   String postData = s1 + RF_ID + s2 + content + s3;
 
   //{\"sensorID\": RF_ID,\"card_id\":\"content\"}")
 
   Serial.println(postData);
-/*
+
   if(apiClient.post("/api/sendTagId", contentType, postData) == 0){ 
   // read the status code and body of the response
     int apiStatusCode = apiClient.responseStatusCode();
@@ -88,7 +94,7 @@ void loop() {
   } else {
     Serial.println("Server is not available.");  
   }
- */
+ 
   //Serial.println("Wait one seconds\n");
   delay(1000);
 }

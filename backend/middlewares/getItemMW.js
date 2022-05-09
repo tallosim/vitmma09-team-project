@@ -28,7 +28,7 @@ module.exports = function (objectrepository) {
                 return next({ code: 500, msg: 'DB error!' })
 
             if (!result)
-                return next({ code: 404, msg: `Basket not found with the "${tagID}" tagID.` })
+                return next({ code: 404, msg: `Item not found with the "${tagID}" tagID.` })
 
 
             res.tpl.item = result

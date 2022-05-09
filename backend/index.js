@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 require('./routes')(app)
 
 app.use((err, req, res, next) => {
-    return res.status(err.code).json({ message: err.msg })
+    return res.status(err.code || 500).json({ message: err.msg })
 })
 
 const server = app.listen(PORT, () => {

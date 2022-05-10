@@ -14,8 +14,16 @@ module.exports = function (objectrepository) {
             if (err)
                 return next({ code: 500, msg: 'DB error!' })
 
-            if (result.length === 0)
-                return res.send(result)
+            if (result.length === 0) {
+                const resObject = {
+                    basket: {
+                        basketID: res.tpl.basket.uuid,
+                        name: res.tpl.basket.name
+                    },
+                    products: []
+                }
+                return res.send(resObject)
+            }
 
             res.tpl.items = result
             res.tpl.productIDs = result

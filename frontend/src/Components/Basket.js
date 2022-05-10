@@ -55,7 +55,7 @@ const Basket = ({ data, reset }) => {
                 </div>
             }
             <Typography variant='h4' align='center' style={styles.price}>
-                SUM: {data.products.reduce((acc, product) => acc + product.price, 0)} Ft
+                SUM: {data.products.reduce((acc, product) => acc + product.price * product.items.length, 0)} Ft
             </Typography>
             <Button
                 variant='contained'

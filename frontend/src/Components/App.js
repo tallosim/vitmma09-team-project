@@ -126,7 +126,7 @@ const App = () => {
 			<Typography variant='h2' style={styles.title} align='center'>
 				Smart Basket
 			</Typography>
-			{basket && <Basket data={basket} reset={reset} />}
+			{basket && <Basket data={basket} reset={reset} setLoading={setLoading}/>}
 			{!basket && !errorMsg && <Webcam style={styles.camera} onUserMedia={startScanning} />}
 			{loading && <CircularProgress size={100} style={styles.circularProgress} />}
 			{errorMsg && <ErrorView styles={styles} errorMsg={errorMsg} reset={reset} />}

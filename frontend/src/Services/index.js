@@ -12,5 +12,5 @@ function getProducts (basketID) {
 }
 
 function checkOut(basketID) {
-    return axios.get(`/api/checkOut`, { basketID }).then(handleResponse)
+    return axios.post(`/api/checkOut`, { basketID }).then(handleResponse)
 }

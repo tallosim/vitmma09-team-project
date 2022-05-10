@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Container,
     Typography,
@@ -6,8 +6,9 @@ import {
 } from '@mui/material'
 
 import Product from './Product'
+import { apiServices } from '../Services'
 
-const Basket = ({ data, reset }) => {
+const Basket = ({ data, reset, setLoading }) => {
     const styles = {
         contanier: {
             display: 'flex',
@@ -33,12 +34,23 @@ const Basket = ({ data, reset }) => {
             margin: '5px',
             fontWeight: 'bold',
         },
-        button: {
-            margin: '5px'
+        buttons: {
+            display: 'flex',
+            button: {
+                margin: '5px',
+                width: '150px'
+            }
         }
     }
 
-    const [loading, setLoading] = useState(false)
+    const checkOut = () => {
+        setLoading(true)
+        setTimeout(() =>
+            apiServices.checkOut(data.basket.basketID)
+                .then(response => reset())
+                .catch(reason => setLoading(false))
+            , 500)
+    }
 
     return (
         <Container style={styles.contanier}>
@@ -57,13 +69,16 @@ const Basket = ({ data, reset }) => {
             <Typography variant='h4' align='center' style={styles.price}>
                 SUM: {data.products.reduce((acc, product) => acc + product.price * product.items.length, 0)} Ft
             </Typography>
-            <Button
-                variant='contained'
-                size='large'
-                style={styles.button}
-            >
-                Check out!
-            </Button>
+            <div style={styles.buttons}>
+                {data.products.length > 0 &&
+                    <Button variant='contained' size='large' style={styles.buttons.button} onClick={checkOut}>
+                        Check out
+                    </Button>
+                }
+                <Button variant='contained' color='secondary' size='large' style={styles.buttons.button} onClick={reset}>
+                    Cancel
+                </Button>
+            </div>
         </Container >
     )
 }

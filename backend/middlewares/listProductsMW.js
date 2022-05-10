@@ -23,6 +23,14 @@ module.exports = function (objectrepository) {
                 items: product.items
             }))
 
-        return res.send(products)
+        const resObject = {
+            basket: {
+                basketID: res.tpl.basket.uuid,
+                name: res.tpl.basket.name
+            },
+            products
+        }
+
+        return res.send(resObject)
     }
 }

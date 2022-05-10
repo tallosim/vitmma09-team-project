@@ -19,6 +19,7 @@ const tags = process.env.TAGS.split(' ')
 
 let basket = Basket()
 basket.uuid = 'ff23cb4d-57c9-4099-8cbf-30dd10d7cc4a'
+basket.name = '#001'
 
 basket.save((err, basketResult) => {
     if (err)

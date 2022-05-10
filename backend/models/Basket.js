@@ -3,6 +3,7 @@ const db = require('../config/db')
 
 const Basket = db.model('baskets', {
     uuid: Schema.Types.String,
+    name: Schema.Types.String
 })
 
 module.exports = Basket

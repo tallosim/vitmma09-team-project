@@ -7,7 +7,7 @@ import {
 
 import Product from './Product'
 
-const Basket = ({ data, refresh }) => {
+const Basket = ({ data, reset }) => {
     const styles = {
         contanier: {
             display: 'flex',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
 	Container,
 	Typography
@@ -34,7 +34,10 @@ const App = () => {
 		}
 	}
 
+	const refresh = () => setQrData(null)
+
 	const [qrData, setQrData] = useState(null)
+	const qrRef = useRef(null) //to stop use camaera
 	const basketID = 'ff23cb4d-57c9-4099-8cbf-30dd10d7cc4a'
 
 	return (
@@ -45,16 +48,18 @@ const App = () => {
 			{!qrData
 				? <div style={styles.camera}>
 					<QrReader
+						ref={qrRef}
 						onResult={(result, error) => {
 							if (result) {
 								console.log('QR code scanned!')
 								console.log(result)
 								setQrData(result)
+								this.qrRef.current.stopCamera()
 							}
 						}}
 					/>
 				</div>
-				: <Basket basketID={basketID} />
+				: <Basket basketID={basketID} refresh={refresh} />
 			}
 			<Typography variant='h6' style={styles.copyright} align='center'>
 				Máté Tallósi &copy; 2022

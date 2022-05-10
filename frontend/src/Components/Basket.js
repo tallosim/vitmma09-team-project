@@ -8,7 +8,7 @@ import {
 
 import Product from './Product'
 
-const Basket = ({ basketID }) => {
+const Basket = ({ basketID, refresh }) => {
     const styles = {
         contanier: {
             display: 'flex',
@@ -64,7 +64,13 @@ const Basket = ({ basketID }) => {
                     <Typography variant='h4' align='center' style={styles.price}>
                         SUM: {data.products.reduce((acc, product) => acc + product.price, 0)} Ft
                     </Typography>
-                    <Button variant='contained' size='large' style={styles.button}>Check out!</Button>
+                    <Button
+                        variant='contained'
+                        size='large'
+                        style={styles.button}
+                    >
+                        Check out!
+                    </Button>
                 </Container >
                 : <CircularProgress size={80} style={styles.circularProgress} />
             }

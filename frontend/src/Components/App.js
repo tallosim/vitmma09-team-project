@@ -135,7 +135,7 @@ const App = () => {
 				Smart Basket
 			</Typography>
 			{basket && <Basket data={basket} reset={reset} setLoading={setLoading} />}
-			{!basket && !errorMsg && <Webcam style={styles.camera} onUserMedia={startScanning} />}
+			{!basket && !errorMsg && <Webcam style={styles.camera} onUserMedia={startScanning} videoConstraints={{ video: { facingMode: 'environment' } }} />}
 			{loading && <CircularProgress size={100} style={styles.circularProgress} />}
 			{errorMsg && <ErrorView styles={styles} errorMsg={errorMsg} reset={reset} />}
 			<Typography variant='h6' style={styles.copyright} align='center'>

@@ -21,7 +21,7 @@ module.exports = (app) => {
 
     var io = new Server(process.env.SOCKET_PORT || 4220, {
         cors: {
-            origin: 'http://localhost:3000'
+            origin: process.env.ORIGIN_URL || 'http://localhost:3000'
         }
     })
     app.io = io

@@ -20,20 +20,20 @@ module.exports = (app) => {
         productModel: Product
     }
 
-    app.route('/api/listProductsInBasket/:basketID').get(
+    app.route('/listProductsInBasket/:basketID').get(
         getBasketMW(objectRepository),
         getItemsInBasketMW(objectRepository),
         getProductsMW(objectRepository),
         listProductsMW(objectRepository)
     )
 
-    app.route('/api/checkOut').post(
+    app.route('/checkOut').post(
         getBasketMW(objectRepository),
         getItemsInBasketMW(objectRepository),
         checkOutItemsMW(objectRepository)
     )
 
-    app.route('/api/sendTagID').post(
+    app.route('/sendTagID').post(
         sendTagIDMW(objectRepository),
         getItemMW(objectRepository),
         getBasketMW(objectRepository),

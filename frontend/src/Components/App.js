@@ -51,11 +51,11 @@ const App = () => {
 		},
 		camera: {
 			width: '80%',
-			maxHeigth: '70vh'
+			maxHeigth: '50vh'
 		},
 		error: {
 			margin: '15px',
-			height: '70vh',
+			height: '60vh',
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',

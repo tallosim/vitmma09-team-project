@@ -18,7 +18,7 @@ const Basket = ({ data, reset, setLoading }) => {
         products: {
             margin: '15px',
             overflowY: 'scroll',
-            height: '50vh'
+            height: '40vh'
         },
         noProducts: {
             margin: '15px',

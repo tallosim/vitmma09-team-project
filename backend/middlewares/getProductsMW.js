@@ -1,8 +1,8 @@
 const requireOption = require('./common').requireOption
 const sanitize = require('mongo-sanitize')
 
-module.exports = function (objectrepository) {
-    const ProductModel = requireOption(objectrepository, 'productModel')
+module.exports = function (objectRepository) {
+    const ProductModel = requireOption(objectRepository, 'productModel')
 
     return function (req, res, next) {
         if (!res.tpl || !res.tpl.productIDs)

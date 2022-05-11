@@ -9,7 +9,7 @@ import { BrowserQRCodeReader } from '@zxing/browser'
 import Webcam from 'react-webcam'
 
 import Basket from './Basket'
-import { apiServices } from '../Services'
+import { apiServices, socketService } from '../Services'
 import { isUUID } from '../Helpers'
 
 const codeReader = new BrowserQRCodeReader()
@@ -79,6 +79,27 @@ const App = () => {
 		setBasket(null)
 		setLoading(false)
 		setErrorMsg(null)
+
+		socketService.dispairSocket()
+	}
+
+	const getProducts = (basketID) => {
+		apiServices.getProducts(basketID)
+			.then(response => {
+				setLoading(false)
+				setBasket(response.data)
+			})
+			.catch(reason => {
+				console.log(reason)
+
+				const message = reason.response
+					&& reason.response.status
+					&& reason.response.status === 404
+					? 'Basket not found this QR code.'
+					: reason.message
+				setLoading(false)
+				setErrorMsg(message)
+			})
 	}
 
 	const onResult = (result) => {
@@ -87,22 +108,9 @@ const App = () => {
 
 		if (result.text && isUUID(result.text) && !basket) {
 			setLoading(true)
-			apiServices.getProducts(result.text)
-				.then(response => {
-					setLoading(false)
-					setBasket(response.data)
-				})
-				.catch(reason => {
-					console.log(reason)
-
-					const message = reason.response
-						&& reason.response.status
-						&& reason.response.status === 404
-						? 'Basket not found this QR code.'
-						: reason.message
-					setLoading(false)
-					setErrorMsg(message)
-				})
+			socketService.pairSocket(result.text)
+			socketService.listenSocket('RDID_READ', (data) => getProducts(result.text))
+			getProducts(result.text)
 		}
 		else {
 			setErrorMsg('Invalid QR code.')
@@ -126,7 +134,7 @@ const App = () => {
 			<Typography variant='h2' style={styles.title} align='center'>
 				Smart Basket
 			</Typography>
-			{basket && <Basket data={basket} reset={reset} setLoading={setLoading}/>}
+			{basket && <Basket data={basket} reset={reset} setLoading={setLoading} />}
 			{!basket && !errorMsg && <Webcam style={styles.camera} onUserMedia={startScanning} />}
 			{loading && <CircularProgress size={100} style={styles.circularProgress} />}
 			{errorMsg && <ErrorView styles={styles} errorMsg={errorMsg} reset={reset} />}

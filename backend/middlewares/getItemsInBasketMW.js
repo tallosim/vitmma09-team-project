@@ -2,9 +2,9 @@ const requireOption = require('./common').requireOption
 const sanitize = require('mongo-sanitize')
 const mongoose = require('mongoose')
 
-module.exports = function (objectrepository) {
-    const ItemModel = requireOption(objectrepository, 'itemModel')
-    const ItemStatusModel = requireOption(objectrepository, 'itemStatusModel')
+module.exports = function (objectRepository) {
+    const ItemModel = requireOption(objectRepository, 'itemModel')
+    const ItemStatusModel = requireOption(objectRepository, 'itemStatusModel')
 
     return function (req, res, next) {
         if (!res.tpl || !res.tpl.basket)

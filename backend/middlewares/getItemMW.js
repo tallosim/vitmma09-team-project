@@ -1,8 +1,8 @@
 const requireOption = require('./common').requireOption
 const sanitize = require('mongo-sanitize')
 
-module.exports = function (objectrepository) {
-    const ItemModel = requireOption(objectrepository, 'itemModel')
+module.exports = function (objectRepository) {
+    const ItemModel = requireOption(objectRepository, 'itemModel')
 
     return function (req, res, next) {
         var tagID = null

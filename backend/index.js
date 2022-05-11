@@ -1,8 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const sanitize = require('sanitize')
+const dotenv = require('dotenv')
 
-const PORT = 8000
+dotenv.config()
+
+const PORT = process.env.HTTP_PORT || 8000
 
 const app = express()
 
@@ -15,9 +18,16 @@ app.use((req, res, next) => {
     return next()
 })
 
-require('./routes')(app)
+require('./routes/socket')(app)
+require('./routes/route')(app)
+
+app.use((req, res, next) => {
+    res.status(404).send('Endpoint not found!')
+})
 
 app.use((err, req, res, next) => {
+    const log = err
+    log.msg = `[express]: ${err.msg}`
     console.log(err)
     return res.status(err.code || 500).json({ message: err.msg })
 })

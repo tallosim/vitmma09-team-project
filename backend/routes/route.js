@@ -37,6 +37,6 @@ module.exports = (app) => {
         sendTagIDMW(objectRepository),
         getItemMW(objectRepository),
         getBasketMW(objectRepository),
-        saveReadingsMW(objectRepository)
+        saveReadingsMW(objectRepository, app.io)
     )
 }

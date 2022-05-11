@@ -1,8 +1,8 @@
 const requireOption = require('./common').requireOption
 const sanitize = require('mongo-sanitize')
 
-module.exports = function (objectrepository) {
-    const BasketModel = requireOption(objectrepository, 'basketModel')
+module.exports = function (objectRepository) {
+    const BasketModel = requireOption(objectRepository, 'basketModel')
 
     return function (req, res, next) {
         var basketID = null

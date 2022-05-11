@@ -1,7 +1,7 @@
 const requireOption = require('./common').requireOption
 
-module.exports = function (objectrepository) {
-    const ItemStatusModel = requireOption(objectrepository, 'itemStatusModel')
+module.exports = function (objectRepository, io) {
+    const ItemStatusModel = requireOption(objectRepository, 'itemStatusModel')
 
     return function (req, res, next) {
         res.tpl.item.lastRead = {
@@ -14,7 +14,9 @@ module.exports = function (objectrepository) {
             if (err)
                 return next({ code: 500, msg: 'Database error during saving.' })
             
-            console.log(`RFID tag readed "${res.tpl.item.tagID}" from "${req.body.basketID}" basket.`)
+            io.to(res.tpl.basket.socketID).emit('RDID_READ')
+
+            console.log(`[express]: RFID tag read "${res.tpl.item.tagID}" from "${req.body.basketID}" basket.`)
             return res.json('Ok')  
         })
     }

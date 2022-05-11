@@ -1,7 +1,7 @@
 const requireOption = require('./common').requireOption
 const sanitize = require('mongo-sanitize')
 
-module.exports = function (objectrepository) {
+module.exports = function (objectRepository) {
     return function (req, res, next) {
         var products = JSON.parse(JSON.stringify(res.tpl.products))
 

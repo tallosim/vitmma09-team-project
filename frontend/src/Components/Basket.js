@@ -22,7 +22,7 @@ const Basket = ({ data, reset, setLoading }) => {
         },
         noProducts: {
             margin: '15px',
-            height: '50vh',
+            height: '40vh',
             display: 'flex',
             alignItems: 'center',
             text: {

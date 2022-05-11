@@ -3,7 +3,7 @@ import { io } from 'socket.io-client'
 
 import { handleResponse } from '../Helpers'
 
-const SOCKET_URL = process.env.SOCKET_URL ||'http://localhost:4220'
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL ||'http://localhost:4220'
 
 export const apiServices = {
     getProducts,

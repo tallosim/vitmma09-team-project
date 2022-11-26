@@ -33,6 +33,12 @@ module.exports = (app) => {
         checkOutItemsMW(objectRepository)
     )
 
+    app.route('/api/reset').post(
+        getBasketMW(objectRepository),
+        getItemsInBasketMW(objectRepository),
+        checkOutItemsMW(objectRepository)
+    )
+
     app.route('/api/sendTagID').post(
         sendTagIDMW(objectRepository),
         getItemMW(objectRepository),

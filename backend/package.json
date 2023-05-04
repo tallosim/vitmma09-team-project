@@ -24,6 +24,6 @@
     "mongo-sanitize": "^1.1.0",
     "mongoose": "^6.6.3",
     "sanitize": "^2.1.2",
-    "socket.io": "^4.5.0"
+    "socket.io": "^4.6.0"
   }
 }
